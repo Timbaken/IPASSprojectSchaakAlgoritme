@@ -76,6 +76,7 @@ def main():
                         if puzzleBuilder and piece != None:
                             game_state.board[row][col] = piece
                     if 12 > col > 7 and row == 7 and not puzzleBuilder:
+                        print('loading')
                         score = NegaMaxAlphaBeta(game_state, valid_moves, diepte, -schaakmat, schaakmat)
                         if score == schaakmat and game_state.white_to_move:
                             print('wit heeft een mat in 2')
@@ -277,6 +278,21 @@ def drawGameState(screen, game_state, valid_moves, square_selected, puzzlePieceS
 
 
 def drawPuzleOptions(screen, game_state):
+    """
+    Tekent alle puzzelopties op het scherm met tekst
+    En tekent de schaakstukken opties voor de puzzelbuilder
+
+    Parameters
+    ----------
+    screen: pygame.display
+        scherm wat pygame laat zien
+    gameState: Gamestate
+        de gamestate die bekeken gaat worden
+
+    Returns
+    -------
+    niet van toepassing
+    """
     p.draw.rect(screen, p.Color("light blue"), p.Rect(12*SQUARE_SIZE, 0, SQUARE_SIZE, SQUARE_SIZE))
     p.draw.rect(screen, p.Color("purple"), p.Rect(13 * SQUARE_SIZE, 0, SQUARE_SIZE, SQUARE_SIZE))
     p.draw.rect(screen, p.Color("blue"), p.Rect(12 * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
