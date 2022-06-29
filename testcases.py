@@ -110,7 +110,7 @@ class testcases(unittest.TestCase):
         expected = True
         actual = gameState.checkmate
         self.assertEqual(actual, expected)
-        Expected = False
+        expected = False
         actual = gameState.white_to_move
         self.assertEqual(actual, expected)
 
