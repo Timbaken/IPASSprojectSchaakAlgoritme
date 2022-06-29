@@ -74,8 +74,7 @@ def findMove(bord, moves, depth, alpha, beta):
 def NegaMaxAlphaBeta(bord, moves, depth, alpha, beta):
     global NMmove
     if depth == 0:
-        e = evalBoard(bord)
-        return e
+        return evalBoard(bord)
     maxScore = alpha
     for move in moves:
         bord.makeMove(move)
