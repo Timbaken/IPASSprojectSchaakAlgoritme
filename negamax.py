@@ -71,35 +71,36 @@ def findMove(bord, moves, depth, alpha, beta):
     NegaMaxAlphaBeta(bord, moves, depth, alpha, beta)
     return NMmove
 
-def NegaMaxAlphaBeta(bord, moves, depth, alpha, beta):
+def NegaMaxAlphaBeta(gameState, moves, depth, alpha, beta):
     global NMmove
     if depth == 0:
-        return evalBoard(bord)
+        return evalBoard(gameState)
     maxScore = alpha
     for move in moves:
-        bord.makeMove(move)
-        nieuweMoves = bord.getValidMoves()
-        score = -NegaMaxAlphaBeta(bord, nieuweMoves, depth - 1, -beta, -maxScore)
+        gameState.makeMove(move)
+        nieuweMoves = gameState.getValidMoves()
+        score = -NegaMaxAlphaBeta(gameState, nieuweMoves, depth - 1, -beta, -maxScore)
         if score >= maxScore:
             maxScore = score
             if depth == diepte:
                 NMmove = move
-        bord.undoMove()
+        gameState.undoMove()
         if maxScore >= beta:
             return maxScore
     return maxScore
 
 
-def evalBoard(game_state):
-    if game_state.checkmate:
-        return -schaakmat if game_state.white_to_move else schaakmat
-    elif game_state.stalemate:
+def evalBoard(gameState):
+    nieuweMoves = gameState.getValidMoves()
+    if gameState.checkmate:
+        return -schaakmat if gameState.white_to_move else schaakmat
+    elif gameState.stalemate:
         return gelijkspel
 
     score = 0
-    for i in range(len(game_state.board)):
-        for j in range(len(game_state.board[i])):
-            schaakStuk = game_state.board[i][j]
+    for i in range(len(gameState.board)):
+        for j in range(len(gameState.board[i])):
+            schaakStuk = gameState.board[i][j]
             if schaakStuk != "--":
                 if schaakStuk[0] == "w":
                     multiplier = 1
